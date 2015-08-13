@@ -1275,7 +1275,9 @@ function defaultValidateNewUserHook(user) {
   if (!domain)
     return true;
 
-  var emailIsGood = false;
+  // Shaz: Modified this to be true default
+  // var emailIsGood = false;
+  var emailIsGood = true;
   if (!_.isEmpty(user.emails)) {
     emailIsGood = _.any(user.emails, function (email) {
       return self._testEmailDomain(email.address);
@@ -1408,7 +1410,7 @@ function setupUsersCollection(users) {
 
   /// DEFAULT INDEXES ON USERS
   users._ensureIndex('username', {unique: 1, sparse: 1});
-  users._ensureIndex('emails.address', {unique: 1, sparse: 1});
+  //users._ensureIndex('emails.address', {unique: 1, sparse: 1});
   users._ensureIndex('services.resume.loginTokens.hashedToken',
                      {unique: 1, sparse: 1});
   users._ensureIndex('services.resume.loginTokens.token',
